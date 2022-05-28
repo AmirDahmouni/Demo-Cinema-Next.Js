@@ -10,7 +10,6 @@ export async function getStaticProps(){
 }
 
 export default function HomePage(props) {
-  console.log(props)
   return (
       <MeetupList meetups={props.meetups}/>   
   )
