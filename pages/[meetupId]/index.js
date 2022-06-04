@@ -10,7 +10,7 @@ export async function getStaticProps(context){
   console.log(meetupId)
   return {
     props :{
-
+      meetUp:DUMMY_MEETUPS.find(meet=>meet.id==context.params.meetupId)
     }
   }
 }
@@ -19,23 +19,23 @@ export async function getStaticPaths()
 {
   return {
     fallback:false,
-    paths: [{
+    paths: [
+      {
       params :{
         meetupId:"m1"
+       }
+      },
+      {
+        params :{
+          meetupId:"m2"
+        }
       }
-    }]
+   ]
   }
 }
 
-export default function MeetupDetails()
+export default function MeetupDetails(props)
 {
-    const router=useRouter()
-    const [meetUp,setMeetUp]=useState(null)
-    useEffect(()=>{
-          setMeetUp(DUMMY_MEETUPS.find(meet=>meet.id==router.query.meetupId))
-    },[])
-        
-    return ( meetUp && <MeetupDetail Meetup={meetUp} />)
-        
+    return <MeetupDetail Meetup={props.meetUp} />    
 }
 

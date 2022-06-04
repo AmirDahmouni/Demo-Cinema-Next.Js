@@ -22,7 +22,8 @@ export async function getServerSideProps(context){
   };
 }*/
 
-export default function HomePage(props) {
+export default function HomePage(props) 
+{
   return (
       <MeetupList meetups={props.meetups}/>   
   )
