@@ -36,6 +36,9 @@ export async function getStaticPaths()
 
 export default function MeetupDetails(props)
 {
+   useEffect(()=>{
+
+   },[])
     return <MeetupDetail Meetup={props.meetUp} />    
 }
 
