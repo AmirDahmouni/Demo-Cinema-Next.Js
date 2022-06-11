@@ -3,7 +3,7 @@ import NewMeetUpForm from "../../components/meetups/NewMeetupForm"
 
 export default function NewMeetUpPage()
 {
-    const addMeetUpHandler=(entredMeetupData)=>{
+    const  addMeetUpHandler=async (entredMeetupData)=>{
        console.log(entredMeetupData)
     }
     return <NewMeetUpForm onAddMeetup={addMeetUpHandler} />
