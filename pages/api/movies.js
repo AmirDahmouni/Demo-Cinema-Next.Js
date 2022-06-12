@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     const moviesCollection=db.collection("movies")
     try
     {
-     const movies=await meetupCollections.find().toArray()
+     const movies=await moviesCollection.find().toArray()
      if(movies) return res.status(200).json({ movies})
     }
     catch(ex)

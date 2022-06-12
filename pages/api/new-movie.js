@@ -12,9 +12,9 @@ export default async function handler(req, res) {
     const client=await MongoClient.connect("mongodb://localhost/cinema")
     const db=client.db()
 
-    const meetupCollections=db.collection("movies")
+    const moviesCollections=db.collection("movies")
     try{
-     const result=await meetupCollections.insertOne(data)
+     const result=await moviesCollections.insertOne(data)
      if(result) return res.status(201).json({ message:"success add movie"})
     }
     catch(ex)
