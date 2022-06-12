@@ -3,10 +3,8 @@ import MoviesList from "../components/movies/MoviesList"
 
 // executed after the build and deploiement
 export async function getStaticProps({req,res}){
-  
   try
   {
-    
     const {data:movies}=await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1}`)
     const {data:localMovies}=await axios.get("http://localhost:3000/api/movies")
 
@@ -14,15 +12,12 @@ export async function getStaticProps({req,res}){
     
     allMovies=[...allMovies,...localMovies.movies]
     
-    
-
     return {
     props: {
        movies: allMovies
       },
       revalidate:10
     };
-    
   }
   catch(ex)
   {
