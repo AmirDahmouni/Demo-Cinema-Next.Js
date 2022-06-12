@@ -4,7 +4,7 @@ import classes from "./MovieDetail.module.css"
 
 export default function MovieDetail({Movie})
 {
-    console.log(Movie)
+    
      return ( 
      <section className={classes.detail}>
          
