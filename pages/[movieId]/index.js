@@ -5,10 +5,10 @@ import axios from "axios"
 //we can't use react hhoks inside getStaticProps or getServerSideProps
 export async function getStaticProps(context){
   const {data:movie}=await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/movie/${context.params.movieId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`)
-  console.log(movie)
+  
   return {
     props:{
-      movie:movie
+      movie
     }
   }
 }
