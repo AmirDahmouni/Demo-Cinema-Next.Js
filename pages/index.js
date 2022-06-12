@@ -1,14 +1,25 @@
-import MeetupList from "../components/meetups/MeetupList"
-import DUMMY_MEETUPS from "./api/MeetUps"
+import axios from "axios"
+import MoviesList from "../components/movies/MoviesList"
+
 
 // executed after the build and deploiement
 export async function getStaticProps(){
-  return {
-    props: {
-       meetups: DUMMY_MEETUPS
-    },
-    revalidate:10
-  };
+
+  try{
+    const {data}=await axios.get(`${process.env.REACT_APP_BASE_URL}/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1}`)
+    return {
+      props: {
+         movies: data.results.sort((a,b)=>new Date(b.release_date) - new Date(a.release_date))
+      },
+      revalidate:10
+    };
+  }
+  catch(ex)
+  {
+    console.log(err.message)
+  }
+  
+  
 }
 //for every incomming request to the server dynamically
 /*
@@ -25,7 +36,7 @@ export async function getServerSideProps(context){
 export default function HomePage(props) 
 {
   return (
-      <MeetupList meetups={props.meetups}/>   
+      <MoviesList movies={props.movies}/>   
   )
 }
 

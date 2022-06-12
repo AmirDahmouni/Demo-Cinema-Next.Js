@@ -3,15 +3,16 @@
 import {MongoClient} from "mongodb"
 
 export default async function handler(req, res) {
+  
   if( req.method=='POST' )
   
   {
     const data=req.body
-    const {title,image,address,}=data
-    const client=await MongoClient.connect("mongodb://localhost/movies")
+    const {title,image,address}=data
+    const client=await MongoClient.connect("mongodb://localhost/cinema")
     const db=client.db()
 
-    const meetupCollections=db.collection("meetups")
+    const meetupCollections=db.collection("movies")
     try{
      const result=await meetupCollections.insertOne(data)
     }
@@ -21,7 +22,7 @@ export default async function handler(req, res) {
     }
   
     client.close()
-  
-    return res.status(200).json({ message:"success fetching movies",result })
+    
+    return res.status(200).json({ message:"success add movie"})
   }
 }

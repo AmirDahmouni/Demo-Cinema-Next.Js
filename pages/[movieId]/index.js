@@ -1,13 +1,11 @@
-import MeetupDetail from "../../components/meetups/MeetupDetail";
-import DUMMY_MEETUPS  from "../api/MeetUps"
+import MovieDetail from "../../components/movies/MovieDetail";
 import {useRouter} from "next/router"
 import { useState,useEffect } from "react";
 
 
 //we can't use react hhoks inside getStaticProps or getServerSideProps
 export async function getStaticProps(context){
-  const meetupId=context.params.meetupId;
-  console.log(meetupId)
+  const meetupId=context.params.movieId;
   return {
     props :{
       meetUp:DUMMY_MEETUPS.find(meet=>meet.id==context.params.meetupId)
@@ -22,23 +20,23 @@ export async function getStaticPaths()
     paths: [
       {
       params :{
-        meetupId:"m1"
+        movieId:"m1"
        }
       },
       {
         params :{
-          meetupId:"m2"
+          movieId:"m2"
         }
       }
    ]
   }
 }
 
-export default function MeetupDetails(props)
+export default function MovieDetails(props)
 {
    useEffect(()=>{
 
    },[])
-    return <MeetupDetail Meetup={props.meetUp} />    
+    return <MovieDetail Movie={props.movies} />    
 }
 
