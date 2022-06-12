@@ -5,18 +5,21 @@ import MoviesList from "../components/movies/MoviesList"
 // executed after the build and deploiement
 export async function getStaticProps(){
 
-  try{
-    const {data}=await axios.get(`${process.env.REACT_APP_BASE_URL}/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1}`)
+  try
+  {
+    
+    const {data}=await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1}`)
     return {
-      props: {
-         movies: data.results.sort((a,b)=>new Date(b.release_date) - new Date(a.release_date))
+    props: {
+       movies: data.results.sort((a,b)=>new Date(b.release_date) - new Date(a.release_date))
       },
       revalidate:10
     };
+    
   }
   catch(ex)
   {
-    console.log(err.message)
+    console.log(ex.message)
   }
   
   

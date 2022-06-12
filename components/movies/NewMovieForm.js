@@ -14,13 +14,13 @@ function NewMovieForm(props) {
 
     const enteredTitle = titleInputRef.current.value;
     const enteredImage = imageInputRef.current.value;
-    const popularityInputRef = popularityInputRef.current.value;
+    const enteredPopularity = popularityInputRef.current.value;
     const enteredDescription = descriptionInputRef.current.value;
 
     const movieData = {
       title: enteredTitle,
       image: enteredImage,
-      popularity: popularityInputRef,
+      popularity: enteredPopularity,
       description: enteredDescription,
     };
 
