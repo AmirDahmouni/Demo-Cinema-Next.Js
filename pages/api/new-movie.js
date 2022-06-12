@@ -15,6 +15,7 @@ export default async function handler(req, res) {
     const meetupCollections=db.collection("movies")
     try{
      const result=await meetupCollections.insertOne(data)
+     if(result) return res.status(201).json({ message:"success add movie"})
     }
     catch(ex)
     {
@@ -23,6 +24,6 @@ export default async function handler(req, res) {
   
     client.close()
     
-    return res.status(200).json({ message:"success add movie"})
+    
   }
 }
