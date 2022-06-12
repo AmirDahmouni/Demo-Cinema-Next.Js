@@ -1,42 +1,35 @@
 import MovieDetail from "../../components/movies/MovieDetail";
-import {useRouter} from "next/router"
-import { useState,useEffect } from "react";
-
+import { useState,useEffect} from "react";
+import axios from "axios"
 
 //we can't use react hhoks inside getStaticProps or getServerSideProps
 export async function getStaticProps(context){
-  const meetupId=context.params.movieId;
+  const {data:movie}=await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/movie/${context.params.movieId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`)
+  console.log(movie)
   return {
-    props :{
-      meetUp:DUMMY_MEETUPS.find(meet=>meet.id==context.params.meetupId)
+    props:{
+      movie:movie
     }
   }
 }
 
 export async function getStaticPaths()
 {
+  const {data}=await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1}`)
+  
+  const movies = data.results.slice(0, 20);
+  const paths = movies.map((post) => ({ params: { movieId: post.id.toString() } }));
   return {
-    fallback:false,
-    paths: [
-      {
-      params :{
-        movieId:"m1"
-       }
-      },
-      {
-        params :{
-          movieId:"m2"
-        }
-      }
-   ]
-  }
+    paths,
+    fallback: true,
+  };
 }
 
 export default function MovieDetails(props)
 {
    useEffect(()=>{
-
+    console.log(props)
    },[])
-    return <MovieDetail Movie={props.movies} />    
+    return <MovieDetail Movie={props.movie} />    
 }
 

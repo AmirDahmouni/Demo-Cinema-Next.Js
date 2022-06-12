@@ -4,6 +4,7 @@ import Card from '../ui/Card';
 import classes from './NewMovieForm.module.css';
 
 function NewMovieForm(props) {
+  const idInputRef=useRef();
   const titleInputRef = useRef();
   const imageInputRef = useRef();
   const popularityInputRef = useRef();
@@ -12,14 +13,16 @@ function NewMovieForm(props) {
   function submitHandler(event) {
     event.preventDefault();
 
+   
     const enteredTitle = titleInputRef.current.value;
     const enteredImage = imageInputRef.current.value;
     const enteredPopularity = popularityInputRef.current.value;
     const enteredDescription = descriptionInputRef.current.value;
-
+    
     const movieData = {
+      id: Math.floor(Math.random() * 100)*Math.floor(Math.random() * 100),
       title: enteredTitle,
-      image: enteredImage,
+      backdrop_path: enteredImage,
       popularity: enteredPopularity,
       description: enteredDescription,
     };
@@ -30,13 +33,14 @@ function NewMovieForm(props) {
   return (
     <Card>
       <form className={classes.form} onSubmit={submitHandler}>
+        
         <div className={classes.control}>
           <label htmlFor='title'>Movie Title</label>
           <input type='text' required id='title' ref={titleInputRef} />
         </div>
         <div className={classes.control}>
           <label htmlFor='image'>Movie Image</label>
-          <input type='url' required id='image' ref={imageInputRef} />
+          <input type="file" required id='image' onChange={uploadFile} />
         </div>
         <div className={classes.control}>
           <label htmlFor='popularity'>Popularity</label>
